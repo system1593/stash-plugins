@@ -1,0 +1,28 @@
+name: Auto Tag Pair
+description: >
+  Aggiunge automaticamente tag alle scene in base allo stash-box usato per identificarle.
+  StashDB: 01-Fatto + 02-Controllate Manualmente.
+  ThePornDB: 01-Fatto + 02-Controllate Manualmente + 03-ThePornDB.
+  OnlyFans (FansDB): 01-Fatto + 02-Controllate Manualmente + 05-OnlyFans.
+  I tag vengono aggiunti solo al momento dell'identificazione e non vengono
+  rimessi se rimossi manualmente in seguito.
+version: "1.1.0"
+exec:
+  - index.js
+interface: js
+tasks:
+  - name: Processa tutte le scene
+    description: >
+      Scansiona tutte le scene esistenti e aggiunge i tag mancanti in base
+      agli stash-box presenti. Utile per applicare i tag alle scene
+      identificate prima dell'installazione del plugin.
+    defaultArgs:
+      mode: all
+hooks:
+  - name: Auto Tag Pair
+    description: >
+      Si attiva automaticamente quando una scena viene identificata tramite
+      stash-box e aggiunge i tag corrispondenti all'endpoint usato.
+    triggeredBy:
+      - Scene.Update.Post
+      - Scene.Create.Post
