@@ -1,24 +1,32 @@
-# Template for creating Stash plugins source index
+# stash-plugins
 
-This template allows you to create a new repository with a few clicks with preconfigured GitHub action to publish your plugins source index. 
-_This assumes you already know how to create plugins for Stash. If you don't, first read [this](https://docs.stashapp.cc/in-app-manual/plugins/#creating-plugins)._
+Plugin personali per [Stash](https://github.com/stashapp/stash), pubblicati come *source index* installabile da Stash.
 
-## How to use it?
+## Plugin
 
-1. Click **Use this template** > **Create a new repository**. 
-1. Choose a repository name and click **Create repository**.
-1. Open **Settings** and head to **Pages**.
-1. Under Build and deployment select the Source as GitHub Actions.
+| Plugin | Versione | Cosa fa |
+|---|---|---|
+| [Auto Tag Pair](plugins/auto-tag-pair/README.md) | 1.1.0 | Aggiunge tag alle scene in base allo stash-box usato per identificarle (StashDB, ThePornDB, FansDB) |
 
-Now add your plugins to [plugins](/plugins) directory and they will be automatically published to the source index.
+## Installazione in Stash
 
-Source index URL:(https://system1593.github.io/stash-plugins/main/index.yml)
+1. **Settings → Plugins → Available Plugins → Add source**
+2. Source URL: `https://system1593.github.io/stash-plugins/main/index.yml`
+3. Installa il plugin dall'elenco della sorgente.
 
-## Share your plugins
+## Repository
 
-- [Create a new topic](https://discourse.stashapp.cc/t/-/33) for your plugin on the community forum.
-- [Add your source index to the list](https://discourse.stashapp.cc/t/-/122) on the Stash community forum.
+- **Principale (Forgejo):** https://git.alexpruteanu.ovh/system15/stash-plugins: qui si fanno commit e push.
+- **Copia (GitHub):** https://github.com/system1593/stash-plugins: aggiornata da Forgejo con un push mirror. Non modificarla direttamente: viene sovrascritta a ogni sincronizzazione.
 
-## License
+A ogni push che tocca `plugins/**`, la GitHub Action [`deploy.yml`](.github/workflows/deploy.yml) esegue [`build_site.sh`](build_site.sh) e pubblica su GitHub Pages lo zip di ogni plugin e `index.yml`.
 
-The default license is set to [AGPL-3.0](/LICENCE). Before publishing any plugins you can change it.
+## Creare un plugin
+
+Ogni plugin va in una cartella dentro [`plugins/`](plugins), con il suo file `.yml`. Guida ufficiale: [Creating plugins](https://docs.stashapp.cc/in-app-manual/plugins/#creating-plugins).
+
+Repository creato dal template ufficiale di Stash per i source index.
+
+## Licenza
+
+Licenza del repository: [AGPL-3.0](LICENCE).
